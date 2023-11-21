@@ -1,27 +1,13 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Post</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-</head>
-<body>
-    <div class="fluid-container">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-md-5">
-            <a class="navbar-brand" href="#">Admin</a>
-            <ul class="navbar-nav d-flex flex-row">
-                <li class="nav-item mr-2 active">
-                    <a class="nav-link" href="#">Posts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Categories</a>
-                </li>
-            </ul>
-        </nav> <!--End nav-->        
+<?php require_once './includes/header.php' ?>
+<?php 
+  if(!isset($_COOKIE['_ua_'])){
+    header("Location: sign-in.php");
+  }
 
+?>
+    <div class="fluid-container">
+        <?php require_once './includes/nav.php' ?>
         <section id="main" class="mx-lg-5 mx-md-2 mx-sm-2 pt-3">
             <h2 class="pb-3">Edit Post</h2>
             <form>
@@ -59,5 +45,4 @@
         </section>
 
     </div>
-</body>
-</html>
+<?php require_once './includes/footer.php' ?>
