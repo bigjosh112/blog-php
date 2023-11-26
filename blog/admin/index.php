@@ -65,19 +65,37 @@
                       <a href="comments.php?id=<?php echo $post_id ?>"><?php echo $post_comment ?></a>
                     </td>
                     <td>
-                        <form action="#" method="POST">
-                            <button>Edit</button>
+                        <form action="edit-post.php" method="POST">
+                          <input type="hidden" value="<?php echo $post_id ?>" name="val">
+                          <input type="submit" name="edit-post" class="btn btn-link" value="Edit">
                         </form>
                     </td>
+                   
                     <td>
-                        <form action="#">
-                            <button>Delete</button>
+                        <form action="index.php" method="POST">
+                          <input type="hidden" value="<?php echo $post_id ?>" name="val">
+                          <input type="submit" name="delete-post" class="btn btn-link" value="Delete">
                         </form>               
                     </td>
                     </tr>
+                    <?php
+                    if(isset($_POST['delete-post'])){
+                      $pid = $_POST['val'];
+                      $sql3 = 'DELETE FROM posts WHERE post_id = :pid';
+                      $stmt3 = $pdo->prepare($sql3);
+                      $stmt3->execute([
+                        ':pid' => $pid
+                      ]);
+                      header("Location: index.php");
+                    }
+                  ?>
+
+               
                  <?php }
                 }
               ?>
+
+          
                 
                 
             </tbody>

@@ -33,12 +33,14 @@
     <h2 class="my-3">All Posts</h2>
 
     <?php
-
-    $sql = 'SELECT * FROM posts LIMIT :page_id, :post_per_page';
+    $status = 'Published';
+    $sql = 'SELECT * FROM posts WHERE post_status = :status LIMIT :page_id, :post_per_page';
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':page_id', $page_id, PDO::PARAM_INT);
     $stmt->bindParam(':post_per_page', $post_per_page, PDO::PARAM_INT);
-    $stmt->execute();
+    $stmt->execute([
+        ':status' => $status
+    ]);
     while ($post = $stmt->fetch(PDO::FETCH_ASSOC)) {
       $post_id = $post['post_id'];
       $post_title = $post['post_title'];

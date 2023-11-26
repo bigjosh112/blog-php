@@ -11,7 +11,7 @@
 
         <section id="main" class="mx-lg-5 mx-md-2 mx-sm-2 pt-3">
             <h2 class="pb-3">Add New Post</h2>
-
+ 
             <?php
                 if(isset($_POST['create-post'])){
                     $post_title = $_POST['post-title'];
