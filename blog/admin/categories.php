@@ -42,6 +42,49 @@ if (!isset($_COOKIE['_ua_'])) {
                 </div>
             </div>
         </form>
+
+        <?php
+         if(isset($_POST['update-cat'])){
+            $cat_title = trim($_POST['cat_title']);
+            
+            if(empty($cat_title)){
+                echo 'Sorry this field cannot be empty';
+            }else {
+            $catid = $_POST['value'];
+            $sql3 = 'UPDATE categories SET category_title = :title WHERE category_id = :catid';
+            $stmt3 = $pdo->prepare($sql3);
+            $stmt3->execute([
+                ':title' => $cat_title,
+                ':catid' => $catid
+            ]);
+            header('Location: categories.php'); }
+           
+        }
+        if (isset($_POST['update-category'])) { 
+            $_POST['edit-cat-id'];
+            $tit = $_POST['edit-cat-title']; 
+            if(isset($_POST['edit-cat-id'])){
+                $cat_id = $_POST['edit-cat-id'];
+
+             }
+             ?>
+
+            <form class="py-4" method="POST" action="categories.php">
+                <div class="row">
+                    <div class="col">
+                        
+                        <input type="hidden" value="<?php echo $cat_id ?>" name="value">
+                        <input name="cat_title" value="<?php echo $tit ?>" type="text" class="form-control" placeholder="Enter category name">
+                    </div>
+                    <div class="col">
+                        <input name="update-cat" type="submit" class="form-control btn btn-primary" value="Update Category">
+                    </div>
+                </div>
+            </form>
+
+        <?php }
+           
+        ?>
         <h2>All Categories</h2>
         <table class="table">
             <thead class="thead-dark">
@@ -66,7 +109,8 @@ if (!isset($_COOKIE['_ua_'])) {
                         <td><?php echo $cat_title ?></td>
                         <td>
                             <form action="categories.php" method="POST">
-                                <input type="hidden"  value="<?php echo $cat_id ?>" name="edit-cat-id">
+                                 <input type="hidden" value="<?php echo $cat_title ?>" name="edit-cat-title">
+                                <input type="hidden" value="<?php echo $cat_id ?>" name="edit-cat-id">
                                 <input type="submit" name="update-category" class="btn btn-link" value="Edit">
                             </form>
                         </td>
